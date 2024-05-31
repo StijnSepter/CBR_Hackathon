@@ -31,7 +31,8 @@ io.on('connection', socket =>{
 
     socket.on('getQuestions', request=>{
         console.log(request)
-        let questions = loadJson('server/database/vragen_auto_nl.json');
+
+        let questions = loadJson(`server/database/vragen_${request.type}_${request.language}.json`);
         let timedQuestions = _.filter(questions, {'type':"1"})
         let timedQuestionsSample = _.sampleSize(timedQuestions, 25)
 
