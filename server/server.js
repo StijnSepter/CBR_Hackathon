@@ -26,9 +26,6 @@ io.on('connection', socket =>{
     Connected++
     console.log('Exams Connected ' + Connected);
 
-
-
-
     socket.on('getQuestions', request=>{
         console.log(request)
 
@@ -46,11 +43,8 @@ io.on('connection', socket =>{
                 'default':questionsSample,
             }
         }
-
         socket.emit('questionData', {testData})
     })
-
-
 
     socket.on('disconnect', ()=>{
         Connected--

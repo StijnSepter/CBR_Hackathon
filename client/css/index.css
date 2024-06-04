@@ -17,6 +17,30 @@ div:focus {
     color: rgb(112, 185, 199);
 }
 
+/*! hier begint de animatie van de balk*/
+
+.round-time-bar div {
+    height: 5px;
+    background: linear-gradient(to bottom, red, #900);
+    animation: roundtime calc(var(--duration) * 1s) steps(var(--duration)) forwards;
+    transform-origin: left center;
+}
+.round-time-bar[data-style="smooth"] div {
+    animation: roundtime calc(var(--duration) * 1s) linear forwards;
+}
+.round-time-bar[data-color="blue"] div {
+    background: linear-gradient(to bottom, #64b5f6, #1565c0);
+}
+.round-time-bar[data-style="fixed"] div {
+    width: calc(var(--duration) * 5%);
+}
+@keyframes roundtime {
+    to {
+        /* More performant than animating `width` */
+        transform: scaleX(0);
+    }
+}
+
 /* Experimental fading */
 @-webkit-keyframes fadeout {
     100% {
@@ -238,8 +262,6 @@ div[contenteditable] {
     -webkit-animation: fadein .5s linear forwards !important;
     animation: fadein .5s linear forwards !important;
 }
-
-
 
 .answer-key-numerator {
     position: relative;
