@@ -11,14 +11,10 @@
 <script>
     const socket = io();
     socket.on("connect", () => {
-
-
         socket.emit("getQuestions", {'type':'auto', 'language':'nl'})
         socket.on('questionData', data=>{
             console.log(data)
         })
     })
-
-
 </script>
 </html>
