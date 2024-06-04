@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 const { Server } = require('http');
-const path = require('path');
+// const path = require('path');
 const http = require('http').Server(app);
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const dbURI = 'mongodb+srv://stijnsepter:a8S3ijniJB3ELTxn@cbroefenexamen.ksykwxl.mongodb.net/?retryWrites=true&w=majority&appName=CBRoefenexamen';
 const _ = require('lodash');
 const fs = require("fs");

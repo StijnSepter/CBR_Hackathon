@@ -103,10 +103,10 @@ const init = () => {
 const loadQuestion = async (question, init) => {
     updateProgessBarStatus()
     cr_QuizQuestionText(question.question)
-    if (question.type == `multiple` || question.type == `single`) {
+    if (question.type === `multiple` || question.type === `single`) {
         loadMultipleChoiceQuestion(question)
         loadPreviousEnteredChoice(question.entered)
-    } else if (question.type == `short` || question.type == `long`) {
+    } else if (question.type === `short` || question.type === `long`) {
         loadTextFormQuestion()
         loadPreviousEnteredText(question.entered)
     }
@@ -216,12 +216,12 @@ const MoveQuestionContainerMiddle = () => {
 // Adds class names to quiz question based on which type of which it is
 const ed_QuizQuestionElements = (type, press, numerator, container, text) => {
     // Append classes for different types of questions
-    if (type == `single`) {
+    if (type === `single`) {
         // Radio button classes
         press.className = `press-key-label press-label-radio answer-key-numerator unselected-answer-button`
         numerator.className = `answer-key-numerator numerator-radio unselected-answer-button`
         container.classList.add(`question-type-single`)
-    } else if (type == `multiple`) {
+    } else if (type === `multiple`) {
         // Checkbox classes
         press.className = `press-key-label press-label-checkbox answer-key-numerator unselected-answer-button`
         numerator.className = `answer-key-numerator numerator-checkbox unselected-answer-button`
@@ -266,7 +266,7 @@ const cr_ContinueButton = () => {
 
 // Only shows a continue button if a question is selected
 const ShowHideContinueButton = (question) => {
-    if (question.type == 'short' || question.type == `long`) {
+    if (question.type === 'short' || question.type === `long`) {
         document.getElementById(`quiz-continue-button-container`).style.display = `initial`
         document.getElementById(`quiz-continue-text`).style.display = `none`
     } else {
@@ -289,7 +289,7 @@ const ShowHideContinueButton = (question) => {
 const loadNewQuestion = async (adjustment) => {
     // Saves written answers before moving on to next question
     let type = quiz.questions[currentQuestionIndex].type
-    if (type == 'long' || type == 'short') {
+    if (type === 'long' || type === 'short') {
         SaveWrittenAnswers()
     }
     // Removes previous question & answers
@@ -298,10 +298,10 @@ const loadNewQuestion = async (adjustment) => {
         removeAllChildren(`quiz-answer-list`)
         removeAllChildren(`quiz-question-text-container`)
         // Displays previous questions. Does nothing if no questions to load.
-        if (adjustment == `previous-question-load`) {
+        if (adjustment === `previous-question-load`) {
             loadQuestion(quiz.questions[currentQuestionIndex])
             // Displays next question. Does nothing if no questions to load.
-        } else if (adjustment == `next-question-load` && currentQuestionIndex <= quiz.questions.length) {
+        } else if (adjustment === `next-question-load` && currentQuestionIndex <= quiz.questions.length) {
             loadQuestion(quiz.questions[currentQuestionIndex])
         }
     }
@@ -310,7 +310,7 @@ const loadNewQuestion = async (adjustment) => {
 // Checks if we have reached the first or last question
 const canLoadNewQuestion = (adjustment) => {
     // In/de-crement based on if user is loading next or previous question
-    if (adjustment == `next-question-load`) {
+    if (adjustment === `next-question-load`) {
         currentQuestionIndex++
     } else {
         currentQuestionIndex--
@@ -325,13 +325,12 @@ const canLoadNewQuestion = (adjustment) => {
         return false
     }
     return true
-
 }
 
 // Discerns which direction the question will fly on/off the page
 const QuestionContainerLoad = (adjustment) => {
     return new Promise(async (resolve, reject) => {
-        if (adjustment == 'next-question-load') {
+        if (adjustment === 'next-question-load') {
             // Moves container up off the screen
             await MoveQuestionContainer(`up`, `down`)
         } else {
@@ -378,7 +377,7 @@ const selectAnswer = (key, previous) => {
 const storeAnswers = (add, key) => {
     // For adding user's answers to the local object
     if (add) {
-        if (quiz.questions[currentQuestionIndex].type == `single`) {
+        if (quiz.questions[currentQuestionIndex].type === `single`) {
             quiz.questions[currentQuestionIndex].entered.length = 0
         }
         quiz.questions[currentQuestionIndex].entered.push(key)
@@ -472,15 +471,15 @@ document.onkeydown = function(evt) {
     evt = evt || window.event;
     // console.log(evt.keyCode)
     // Registers key selectors for A to J on multiple choice questions.
-    if (evt.keyCode >= 65 && evt.keyCode < 90 || evt.keyCode == 8 || evt.keyCode == 46) {
+    if (evt.keyCode >= 65 && evt.keyCode < 90 || evt.keyCode === 8 || evt.keyCode === 46) {
         selectAnswer(evt.keyCode.toString())
     }
-    if (evt.keyCode == 38) {
+    if (evt.keyCode === 38) {
         loadNewQuestion('previous-question-load')
     }
     // Moves to next question on down arrow tap or enter. Disables iteration using enter key for open ended questions
     let type = quiz.questions[currentQuestionIndex].type
-    if (evt.keyCode == 40 || ((type == `single` || type == `multiple`) && evt.keyCode == 13)) {
+    if (evt.keyCode === 40 || ((type === `single` || type === `multiple`) && evt.keyCode === 13)) {
         loadNewQuestion('next-question-load')
     }
 };
