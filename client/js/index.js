@@ -74,7 +74,6 @@ let counterBack = setInterval(function () {
     else {
         console.log('oki')
     }
-
 }, 1);
 
 
