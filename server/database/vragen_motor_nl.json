@@ -89,6 +89,33 @@
       "answers": ["Ja", "Nee"],
       "entered": [],
       "correct": "Nee"
+    },
+    {
+      "id": 11,
+      "type": "single",
+      "image": "efvkr_031.jpg",
+      "question": "Moet een bedrijfsauto ook zitplaatsen hebben met gordels?",
+      "answers": ["Ja", "Nee"],
+      "entered": [],
+      "correct": "ja"
+    },
+    {
+      "id": 12,
+      "type": "single",
+      "image": "195.jpg",
+      "question": "Is een negatieve wegverkanting voordelig voor het onder controle houden van jouw voertuig?",
+      "answers": ["Ja", "Nee"],
+      "entered": [],
+      "correct": "Nee"
+    },
+    {
+      "id": 13,
+      "type": "single",
+      "image": "348.jpg",
+      "question": "Je gaat rechtdoor. Moet je voorrang verlenen aan de fietser?",
+      "answers": ["Ja", "Nee"],
+      "entered": [],
+      "correct": "Nee"
     }
   ]
 }
