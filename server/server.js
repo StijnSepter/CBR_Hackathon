@@ -8,6 +8,7 @@ const dbURI = 'mongodb+srv://stijnsepter:a8S3ijniJB3ELTxn@cbroefenexamen.ksykwxl
 const _ = require('lodash');
 const fs = require("fs");
 const {request} = require("express");
+const mongoose = require("mongoose");
 let db = undefined;
 
 app.use(express.static('client'))
@@ -17,9 +18,13 @@ const port = process.env.PORT||6969;
 //attach http server to the socket io
 const io = require('socket.io')(http);
 
-http.listen(port, hostname, ()=>{
-    console.log(`Server running at http://${hostname}:${port}`)
-})
+mongoose.connect(dbURI)
+    .then((result) => http.listen(port, hostname, ()=>{
+        db = result;
+        console.log(`Server running at http://${hostname}:${port} via mongoose`)
+    }))
+    .catch((err) => console.log(err))
+
 
 let Connected = 0;
 io.on('connection', socket =>{

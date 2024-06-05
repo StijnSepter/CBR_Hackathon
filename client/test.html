@@ -11,7 +11,7 @@
 <script>
     const socket = io();
     socket.on("connect", () => {
-        socket.emit("getQuestions", {'type':'auto', 'language':'nl'})
+        socket.emit("getQuestions", {'type':'auto', 'language':'en'})
         socket.on('questionData', data=>{
             console.log(data)
         })
