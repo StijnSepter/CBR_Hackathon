@@ -53,26 +53,26 @@ const quiz = {
         }
     ]
 }
+
 const seconds = 8;
 let i = 1000 * seconds;
 const delayAmount = 10;
 let delay = 10;
 let counterBack = setInterval(function () {
     if (i > 0) {
-        document.getElementById('stijn').style.width = (i /10)/seconds + '%';
-        i = i-10;
-    }else if(i === 0){
-        delay--
-        console.log(delay)
-        if (delay < 1){
+        document.getElementById('stijn').style.width = (i / (10 * seconds)) + '%';
+        i = i - 1;  // Decrement by 1 millisecond
+    } else if (i === 0) {
+        delay--;
+        console.log(delay);
+        if (delay < 1) {
             i = 1000 * seconds;
             document.getElementById('next-question-load').click();
-            delay = 10;
+            delay = delayAmount;
         }
         document.getElementById('stijn').style.width = 100 + '%';
-    }
-    else {
-        console.log('oki')
+    } else {
+        console.log('oki');
     }
 }, 1);
 
