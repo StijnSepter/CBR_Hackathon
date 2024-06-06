@@ -2,7 +2,7 @@
 // The `correct` key is referential and should not be served
 const socket = io();
 socket.on("connect", () => {
-
+let i =0
 
     socket.emit("getQuestions", {'type':'auto', 'language':'nl'})
     socket.on('questionData', data=>{
@@ -25,6 +25,7 @@ socket.on("connect", () => {
                 if (delay < 1) {
                     i = 1000 * seconds;
                     document.getElementById('next-question-load').click();
+
                     delay = delayAmount;
                 }
                 document.getElementById('stijn').style.width = 100 + '%';
@@ -195,10 +196,13 @@ socket.on("connect", () => {
         const cr_QuizQuestionText = (question) => {
             // Generating question text
             let quizQuestionTextDIV = document.getElementById(`quiz-question-text-container`)
+            // let quizQuestionImageDIV = document.getElementById(`quiz-question-image-container`)
             let quizQuestionTextSPAN = document.createElement(`span`)
             quizQuestionTextSPAN.className = `quiz-question-text-item`
             quizQuestionTextSPAN.innerText = question
             quizQuestionTextDIV.appendChild(quizQuestionTextSPAN)
+            let i = 0
+            document.getElementById('img').innerHTML = `<img class="question-image" src="../img/${quiz.questions[i].image} " />`
         }
 
 // Creates continue button
@@ -215,6 +219,7 @@ socket.on("connect", () => {
             // Moves to next question on click
             continueBUTTON.onclick = function() {
                 loadNewQuestion(`next-question-load`)
+
             }
             continueSPAN.innerHTML = `press ENTER`
             continueDIV.append(continueBUTTON, continueSPAN)
@@ -263,6 +268,9 @@ socket.on("connect", () => {
                     // Displays next question. Does nothing if no questions to load.
                 } else if (adjustment === `next-question-load` && currentQuestionIndex <= quiz.questions.length) {
                     loadQuestion(quiz.questions[currentQuestionIndex])
+                    i++
+                    console.log(i)
+                    console.log(quiz)
                 }
             }
         }
