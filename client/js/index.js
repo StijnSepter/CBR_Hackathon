@@ -76,6 +76,10 @@ let counterBack = setInterval(function () {
     }
 }, 1);
 
+if (counterBack) {
+    console.log("hello this is the a number " + counterBack);
+}
+
 
 // Tracks index of question on quiz
 let currentQuestionIndex = 0
