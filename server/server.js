@@ -35,6 +35,7 @@ io.on('connection', socket =>{
         console.log(request)
 
         let questions = loadJson(`server/database/vragen_${request.type}_${request.language}.json`);
+        questions = questions.questions
         let timedQuestions = _.filter(questions, {'type':"1"})
         let timedQuestionsSample = _.sampleSize(timedQuestions, 25)
 
@@ -43,11 +44,15 @@ io.on('connection', socket =>{
 
         const testData = {
             'id':null,
-            'questions':{
-                'timed':timedQuestionsSample,
-                'default':questionsSample,
-            }
+
+            'timed':timedQuestionsSample,
+            'default':questionsSample,
         }
+        testData.default.map((question, index)=>{
+
+            delete testData.default[index].correct;
+
+        })
         socket.emit('questionData', {testData})
     })
 
